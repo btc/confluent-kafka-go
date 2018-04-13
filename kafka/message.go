@@ -78,6 +78,7 @@ type Message struct {
 	TimestampType  TimestampType
 	Opaque         interface{}
 	Headers        []Header
+	Delivery       chan<- Event
 }
 
 // String returns a human readable representation of a Message.
