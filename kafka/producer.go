@@ -497,7 +497,12 @@ func channelBatchProducer(p *Producer) {
 			if err != nil {
 				for _, m = range buffered2 {
 					m.TopicPartition.Error = err
-					p.events <- m
+
+					if m.Delivery != nil {
+						m.Delivery <- m
+					} else {
+						p.events <- m
+					}
 				}
 			}
 		}
